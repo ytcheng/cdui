@@ -1,0 +1,23 @@
+微软没有提供64位的Riched20.lib所以在64位编译duilib会报错
+ 下面是解决办法
+
+1）屏蔽 \DuiLib\StdAfx.cpp下
+
+#pragma comment( lib, "winmm.lib" )
+//#pragma comment( lib, "Riched20.lib" )
+#pragma comment( lib, "comctl32.lib" )
+
+2）修改UIRichEdit.cpp的CTxtWinHost::Init函数下面的语句
+
+ // Create Text Services component
+ // if(FAILED(CreateTextServices(NULL, this, &pUnk)))
+        //goto err;
+
+PCreateTextServices TextServicesProc;
+HMODULE hmod = LoadLibrary(_T("msftedit.dll"));
+if (hmod) TextServicesProc = (PCreateTextServices)GetProcAddress(hmod,
+"CreateTextServices");
+if (TextServicesProc)
+{
+        HRESULT hr = TextServicesProc(NULL, this, &pUnk);
+}
