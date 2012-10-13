@@ -19,9 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>YunStaff</ProjectName>
-    <ProjectGuid>{987CF81B-13D9-4A84-8E32-28086021843B}</ProjectGuid>
-    <RootNamespace>360</RootNamespace>
+    <ProjectGuid>{11A20D10-E0D7-447F-A546-8E4662C115C5}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'" Label="Configuration">
@@ -71,7 +69,7 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">.\Debug_u\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">.\Debug_u\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">true</LinkIncremental>
@@ -97,7 +95,7 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\Release/YunStaff.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Release/MenuDemo.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -108,9 +106,10 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Release/YunStaff.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Release/MenuDemo.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
       <ObjectFileName>.\Release/</ObjectFileName>
       <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
@@ -122,15 +121,15 @@
       <Culture>0x0406</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>./Debug/YunStaff.exe</OutputFile>
+      <OutputFile>../bin/MenuDemo.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ProgramDatabaseFile>.\Release/YunStaff.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\Release/MenuDemo.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/YunStaff.bsc</OutputFile>
+      <OutputFile>.\Release/MenuDemo.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -139,20 +138,20 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\Debug/YunStaff.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Debug/MenuDemo.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Debug/YunStaff.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Debug/MenuDemo.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
       <ObjectFileName>.\Debug/</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
@@ -166,18 +165,18 @@
       <Culture>0x0406</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>..\bin\YunStaff_d.exe</OutputFile>
+      <OutputFile>../bin/MenuDemo_d.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\Debug\YunStaff.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\Debug/MenuDemo.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>.\Debug\YunStaff.map</MapFileName>
+      <MapFileName>.\Debug/MenuDemo.map</MapFileName>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/YunStaff.bsc</OutputFile>
+      <OutputFile>.\Debug/MenuDemo.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
@@ -186,7 +185,7 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\Debug/YunStaff.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Debug/MenuDemo.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -196,9 +195,10 @@
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Debug_u/YunStaff.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Debug_u/MenuDemo.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Debug_u/</AssemblerListingLocation>
       <ObjectFileName>.\Debug_u/</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug_u/</ProgramDataBaseFileName>
@@ -212,18 +212,18 @@
       <Culture>0x0406</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>./Debug/YunStaff_ud.exe</OutputFile>
+      <OutputFile>../bin/MenuDemo_ud.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\Debug_u/YunStaff.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\Debug_u/MenuDemo.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>.\Debug_u/YunStaff.map</MapFileName>
+      <MapFileName>.\Debug_u/MenuDemo.map</MapFileName>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/YunStaff.bsc</OutputFile>
+      <OutputFile>.\Debug/MenuDemo.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
@@ -232,7 +232,7 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\Release/YunStaff.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Release/MenuDemo.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
@@ -243,9 +243,10 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Release_u/YunStaff.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderOutputFile>.\Release_u/MenuDemo.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\Release_u/</AssemblerListingLocation>
       <ObjectFileName>.\Release_u/</ObjectFileName>
       <ProgramDataBaseFileName>.\Release_u/</ProgramDataBaseFileName>
@@ -257,33 +258,42 @@
       <Culture>0x0406</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>./Debug/YunStaff_u.exe</OutputFile>
+      <OutputFile>../bin/MenuDemo_u.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ProgramDatabaseFile>.\Release_u/YunStaff.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>.\Release_u/MenuDemo.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/YunStaff.bsc</OutputFile>
+      <OutputFile>.\Release/MenuDemo.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="StdAfx.cpp">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">Create</PrecompiledHeader>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="YunStaff.cpp" />
+    <ClCompile Include="debug.cpp" />
+    <ClCompile Include="main_frame.cpp" />
+    <ClCompile Include="StdAfx.cpp" />
+    <ClCompile Include="UICrack.cpp" />
+    <ClCompile Include="UIMenu.cpp" />
+    <ClCompile Include="win_impl_base.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ControlEx.h" />
+    <ClInclude Include="debug.hpp" />
+    <ClInclude Include="main_frame.hpp" />
+    <ClInclude Include="observer_impl_base.hpp" />
     <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="UICrack.h" />
+    <ClInclude Include="UIMenu.h" />
+    <ClInclude Include="win_impl_base.hpp" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MenuDemo.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\menutest.xml" />
+    <None Include="res\skin.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DuiLib\DuiLib.vcxproj">

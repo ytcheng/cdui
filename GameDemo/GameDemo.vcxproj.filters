@@ -2,20 +2,26 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{dcc9395f-48cf-4918-9b90-8fdf6ff5dbd7}</UniqueIdentifier>
+      <UniqueIdentifier>{e25d76cb-d998-48f2-8ddb-f1b00ba9d5e4}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{324d6e2e-2467-4e9f-8a0e-fab5f7c2be6f}</UniqueIdentifier>
+      <UniqueIdentifier>{6ad36d25-1de1-432e-bcdb-ea93e8479a9a}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Minidump">
+      <UniqueIdentifier>{bd78d3ab-34c3-4a1b-9145-b55a9881e0cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="StdAfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="YunStaff.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MiniDumper.cpp">
+      <Filter>Minidump</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -24,6 +30,9 @@
     </ClInclude>
     <ClInclude Include="StdAfx.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniDumper.h">
+      <Filter>Minidump</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

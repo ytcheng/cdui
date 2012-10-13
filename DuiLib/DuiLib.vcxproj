@@ -19,28 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>YunStaff</ProjectName>
-    <ProjectGuid>{987CF81B-13D9-4A84-8E32-28086021843B}</ProjectGuid>
-    <RootNamespace>360</RootNamespace>
+    <ProjectGuid>{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}</ProjectGuid>
+    <RootNamespace>DuiLib</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -66,18 +65,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Build\Release\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">.\Debug_u\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">.\Debug_u\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">.\Release_u\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">.\Release_u\</IntDir>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</EmbedManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Build\Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</EmbedManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">.\Build\Debug_u\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">.\Build\Debug_u\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">false</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">false</EmbedManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">.\Build\Release_u\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">.\Build\Release_u\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">false</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">false</EmbedManifest>
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
@@ -97,23 +104,19 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\Release/YunStaff.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Release/DuiLib.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
     <ClCompile>
       <Optimization>MinSpace</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;UILIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Release/YunStaff.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
-      <ObjectFileName>.\Release/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>.\Build\Release/DuiLib.pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
@@ -122,15 +125,18 @@
       <Culture>0x0406</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>./Debug/YunStaff.exe</OutputFile>
+      <AdditionalDependencies>Riched20.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../bin/DuiLib.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ProgramDatabaseFile>.\Release/YunStaff.pdb</ProgramDatabaseFile>
-      <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
+      <BaseAddress>0x11000000</BaseAddress>
+      <ImportLibrary>../Lib/DuiLib.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/YunStaff.bsc</OutputFile>
+      <OutputFile>.\Release/DuiLib.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -139,45 +145,43 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\Debug/YunStaff.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Debug/DuiLib.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UILIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Debug/YunStaff.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
-      <ObjectFileName>.\Debug/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
-      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Build\Debug/DuiLib.pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0406</Culture>
+      <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>..\bin\YunStaff_d.exe</OutputFile>
+      <AdditionalDependencies>Riched20.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../bin/DuiLib_d.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>.\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\Debug\YunStaff.pdb</ProgramDatabaseFile>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>.\Debug\YunStaff.map</MapFileName>
-      <SubSystem>Windows</SubSystem>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <BaseAddress>0x11000000</BaseAddress>
+      <ImportLibrary>../lib/DuiLib_d.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/YunStaff.bsc</OutputFile>
+      <OutputFile>.\Debug/DuiLib.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
@@ -186,44 +190,43 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\Debug/YunStaff.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Debug/DuiLib.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UILIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Debug_u/YunStaff.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Debug_u/</AssemblerListingLocation>
-      <ObjectFileName>.\Debug_u/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Debug_u/</ProgramDataBaseFileName>
-      <BrowseInformation>true</BrowseInformation>
+      <PrecompiledHeaderOutputFile>.\Build\Debug_u/DuiLib.pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <Culture>0x0406</Culture>
+      <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>./Debug/YunStaff_ud.exe</OutputFile>
+      <AdditionalDependencies>Riched20.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../bin/DuiLib_ud.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\Debug_u/YunStaff.pdb</ProgramDatabaseFile>
-      <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>.\Debug_u/YunStaff.map</MapFileName>
-      <SubSystem>Windows</SubSystem>
+      <ProgramDatabaseFile>$(OutDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <BaseAddress>0x11000000</BaseAddress>
+      <ImportLibrary>../Lib/DuiLib_ud.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Debug/YunStaff.bsc</OutputFile>
+      <OutputFile>.\Debug/DuiLib.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
@@ -232,23 +235,19 @@
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetEnvironment>Win32</TargetEnvironment>
-      <TypeLibraryName>.\Release/YunStaff.tlb</TypeLibraryName>
+      <TypeLibraryName>.\Release/DuiLib.tlb</TypeLibraryName>
       <HeaderFileName>
       </HeaderFileName>
     </Midl>
     <ClCompile>
       <Optimization>MinSpace</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;UILIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>.\Release_u/YunStaff.pch</PrecompiledHeaderOutputFile>
-      <AssemblerListingLocation>.\Release_u/</AssemblerListingLocation>
-      <ObjectFileName>.\Release_u/</ObjectFileName>
-      <ProgramDataBaseFileName>.\Release_u/</ProgramDataBaseFileName>
+      <PrecompiledHeaderOutputFile>.\Build\Release_u/DuiLib.pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
@@ -257,39 +256,119 @@
       <Culture>0x0406</Culture>
     </ResourceCompile>
     <Link>
-      <OutputFile>./Debug/YunStaff_u.exe</OutputFile>
+      <AdditionalDependencies>Riched20.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../bin/DuiLib_u.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ProgramDatabaseFile>.\Release_u/YunStaff.pdb</ProgramDatabaseFile>
-      <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
+      <BaseAddress>0x11000000</BaseAddress>
+      <ImportLibrary>../Lib/DuiLib_u.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release/YunStaff.bsc</OutputFile>
+      <OutputFile>.\Release/DuiLib.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="StdAfx.cpp">
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Build\Debug/DuiLib.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Build\Release/DuiLib.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">Create</PrecompiledHeader>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="YunStaff.cpp" />
+    <ClCompile Include="UIlib.cpp" />
+    <ClCompile Include="Utils\stb_image.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Utils\UIDelegate.cpp" />
+    <ClCompile Include="Utils\Utils.cpp" />
+    <ClCompile Include="Utils\XUnzip.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeDebug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnicodeRelease|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Core\UIBase.cpp" />
+    <ClCompile Include="Core\UIContainer.cpp" />
+    <ClCompile Include="Core\UIControl.cpp" />
+    <ClCompile Include="Core\UIDlgBuilder.cpp" />
+    <ClCompile Include="Core\UIManager.cpp" />
+    <ClCompile Include="Core\UIMarkup.cpp" />
+    <ClCompile Include="Core\UIRender.cpp" />
+    <ClCompile Include="Layout\UIChildLayout.cpp" />
+    <ClCompile Include="Layout\UIHorizontalLayout.cpp" />
+    <ClCompile Include="Layout\UITabLayout.cpp" />
+    <ClCompile Include="Layout\UITileLayout.cpp" />
+    <ClCompile Include="Layout\UIVerticalLayout.cpp" />
+    <ClCompile Include="Control\UIActiveX.cpp" />
+    <ClCompile Include="Control\UIButton.cpp" />
+    <ClCompile Include="Control\UICheckBox.cpp" />
+    <ClCompile Include="Control\UICombo.cpp" />
+    <ClCompile Include="Control\UIComboBox.cpp" />
+    <ClCompile Include="Control\UIDateTime.cpp" />
+    <ClCompile Include="Control\UIEdit.cpp" />
+    <ClCompile Include="Control\UILabel.cpp" />
+    <ClCompile Include="Control\UIList.cpp" />
+    <ClCompile Include="Control\UIOption.cpp" />
+    <ClCompile Include="Control\UIProgress.cpp" />
+    <ClCompile Include="Control\UIRichEdit.cpp" />
+    <ClCompile Include="Control\UIScrollBar.cpp" />
+    <ClCompile Include="Control\UISlider.cpp" />
+    <ClCompile Include="Control\UIText.cpp" />
+    <ClCompile Include="Control\UIWebBrowser.cpp" />
+    <ClCompile Include="Utils\WinImplBase.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ControlEx.h" />
     <ClInclude Include="StdAfx.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DuiLib\DuiLib.vcxproj">
-      <Project>{e106acd7-4e53-4aee-942b-d0dd426db34e}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
+    <ClInclude Include="UIlib.h" />
+    <ClInclude Include="Utils\downloadmgr.h" />
+    <ClInclude Include="Utils\UIDelegate.h" />
+    <ClInclude Include="Utils\Utils.h" />
+    <ClInclude Include="Utils\WebBrowserEventHandler.h" />
+    <ClInclude Include="Utils\WinImplBase.h" />
+    <ClInclude Include="Core\UIBase.h" />
+    <ClInclude Include="Core\UIContainer.h" />
+    <ClInclude Include="Core\UIControl.h" />
+    <ClInclude Include="Core\UIDefine.h" />
+    <ClInclude Include="Core\UIDlgBuilder.h" />
+    <ClInclude Include="Core\UIManager.h" />
+    <ClInclude Include="Core\UIMarkup.h" />
+    <ClInclude Include="Core\UIRender.h" />
+    <ClInclude Include="Layout\UIChildLayout.h" />
+    <ClInclude Include="Layout\UIHorizontalLayout.h" />
+    <ClInclude Include="Layout\UITabLayout.h" />
+    <ClInclude Include="Layout\UITileLayout.h" />
+    <ClInclude Include="Layout\UIVerticalLayout.h" />
+    <ClInclude Include="Control\UIActiveX.h" />
+    <ClInclude Include="Control\UIButton.h" />
+    <ClInclude Include="Control\UICheckBox.h" />
+    <ClInclude Include="Control\UICombo.h" />
+    <ClInclude Include="Control\UIComboBox.h" />
+    <ClInclude Include="Control\UIDateTime.h" />
+    <ClInclude Include="Control\UIEdit.h" />
+    <ClInclude Include="Control\UILabel.h" />
+    <ClInclude Include="Control\UIList.h" />
+    <ClInclude Include="Control\UIOption.h" />
+    <ClInclude Include="Control\UIProgress.h" />
+    <ClInclude Include="Control\UIRichEdit.h" />
+    <ClInclude Include="Control\UIScrollBar.h" />
+    <ClInclude Include="Control\UISlider.h" />
+    <ClInclude Include="Control\UIText.h" />
+    <ClInclude Include="Control\UIWebBrowser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

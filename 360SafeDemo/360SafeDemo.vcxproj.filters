@@ -2,19 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{dcc9395f-48cf-4918-9b90-8fdf6ff5dbd7}</UniqueIdentifier>
+      <UniqueIdentifier>{47362868-08e9-4588-9499-6b53e32e5fcd}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{324d6e2e-2467-4e9f-8a0e-fab5f7c2be6f}</UniqueIdentifier>
+      <UniqueIdentifier>{ec016596-06b2-426a-b55f-093a775232ab}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="StdAfx.cpp">
+    <ClCompile Include="360Safe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="YunStaff.cpp">
+    <ClCompile Include="StdAfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
