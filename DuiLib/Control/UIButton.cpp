@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	CButtonUI::CButtonUI() : m_uButtonState(0), m_dwHotTextColor(0), m_dwPushedTextColor(0), m_dwFocusedTextColor(0)
+	CButtonUI::CButtonUI() : m_dwHotTextColor(0), m_dwPushedTextColor(0), m_dwFocusedTextColor(0)
 
 	{
 		m_uTextStyle = DT_SINGLELINE | DT_VCENTER | DT_CENTER;
@@ -53,25 +53,25 @@ namespace DuiLib
 		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
 		{
 			if( ::PtInRect(&m_rcItem, event.ptMouse) && IsEnabled() ) {
-				m_uButtonState |= UISTATE_PUSHED | UISTATE_CAPTURED;
+				m_uiState |= UISTATE_PUSHED | UISTATE_CAPTURED;
 				Invalidate();
 			}
 			return;
 		}
 		if( event.Type == UIEVENT_MOUSEMOVE )
 		{
-			if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
-				if( ::PtInRect(&m_rcItem, event.ptMouse) ) m_uButtonState |= UISTATE_PUSHED;
-				else m_uButtonState &= ~UISTATE_PUSHED;
+			if( (m_uiState & UISTATE_CAPTURED) != 0 ) {
+				if( ::PtInRect(&m_rcItem, event.ptMouse) ) m_uiState |= UISTATE_PUSHED;
+				else m_uiState &= ~UISTATE_PUSHED;
 				Invalidate();
 			}
 			return;
 		}
 		if( event.Type == UIEVENT_BUTTONUP )
 		{
-			if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
+			if( (m_uiState & UISTATE_CAPTURED) != 0 ) {
 				if( ::PtInRect(&m_rcItem, event.ptMouse) ) Activate();
-				m_uButtonState &= ~(UISTATE_PUSHED | UISTATE_CAPTURED);
+				m_uiState &= ~(UISTATE_PUSHED | UISTATE_CAPTURED);
 				Invalidate();
 			}
 			return;
@@ -82,22 +82,6 @@ namespace DuiLib
 				m_pManager->SendNotify(this, _T("menu"), event.wParam, event.lParam);
 			}
 			return;
-		}
-		if( event.Type == UIEVENT_MOUSEENTER )
-		{
-			if( IsEnabled() ) {
-				m_uButtonState |= UISTATE_HOT;
-				Invalidate();
-			}
-			// return;
-		}
-		if( event.Type == UIEVENT_MOUSELEAVE )
-		{
-			if( IsEnabled() ) {
-				m_uButtonState &= ~UISTATE_HOT;
-				Invalidate();
-			}
-			// return;
 		}
 		if( event.Type == UIEVENT_SETCURSOR ) {
 			::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
@@ -117,7 +101,7 @@ namespace DuiLib
 	{
 		CControlUI::SetEnabled(bEnable);
 		if( !IsEnabled() ) {
-			m_uButtonState = 0;
+			m_uiState = 0;
 		}
 	}
 
@@ -242,10 +226,10 @@ namespace DuiLib
 
 	void CButtonUI::PaintText(HDC hDC)
 	{
-		if( IsFocused() ) m_uButtonState |= UISTATE_FOCUSED;
-		else m_uButtonState &= ~ UISTATE_FOCUSED;
-		if( !IsEnabled() ) m_uButtonState |= UISTATE_DISABLED;
-		else m_uButtonState &= ~ UISTATE_DISABLED;
+		if( IsFocused() ) m_uiState |= UISTATE_FOCUSED;
+		else m_uiState &= ~ UISTATE_FOCUSED;
+		if( !IsEnabled() ) m_uiState |= UISTATE_DISABLED;
+		else m_uiState &= ~ UISTATE_DISABLED;
 
 		if( m_dwTextColor == 0 ) m_dwTextColor = m_pManager->GetDefaultFontColor();
 		if( m_dwDisabledTextColor == 0 ) m_dwDisabledTextColor = m_pManager->GetDefaultDisabledColor();
@@ -260,11 +244,11 @@ namespace DuiLib
 
 		DWORD clrColor = IsEnabled()?m_dwTextColor:m_dwDisabledTextColor;
 
-		if( ((m_uButtonState & UISTATE_PUSHED) != 0) && (GetPushedTextColor() != 0) )
+		if( ((m_uiState & UISTATE_PUSHED) != 0) && (GetPushedTextColor() != 0) )
 			clrColor = GetPushedTextColor();
-		else if( ((m_uButtonState & UISTATE_HOT) != 0) && (GetHotTextColor() != 0) )
+		else if( ((m_uiState & UISTATE_HOT) != 0) && (GetHotTextColor() != 0) )
 			clrColor = GetHotTextColor();
-		else if( ((m_uButtonState & UISTATE_FOCUSED) != 0) && (GetFocusedTextColor() != 0) )
+		else if( ((m_uiState & UISTATE_FOCUSED) != 0) && (GetFocusedTextColor() != 0) )
 			clrColor = GetFocusedTextColor();
 
 		if( m_bShowHtml )
@@ -277,30 +261,30 @@ namespace DuiLib
 
 	void CButtonUI::PaintStatusImage(HDC hDC)
 	{
-		if( IsFocused() ) m_uButtonState |= UISTATE_FOCUSED;
-		else m_uButtonState &= ~ UISTATE_FOCUSED;
-		if( !IsEnabled() ) m_uButtonState |= UISTATE_DISABLED;
-		else m_uButtonState &= ~ UISTATE_DISABLED;
+		if( IsFocused() ) m_uiState |= UISTATE_FOCUSED;
+		else m_uiState &= ~ UISTATE_FOCUSED;
+		if( !IsEnabled() ) m_uiState |= UISTATE_DISABLED;
+		else m_uiState &= ~ UISTATE_DISABLED;
 
-		if( (m_uButtonState & UISTATE_DISABLED) != 0 ) {
+		if( (m_uiState & UISTATE_DISABLED) != 0 ) {
 			if( !m_sDisabledImage.IsEmpty() ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sDisabledImage) ) m_sDisabledImage.Empty();
 				else return;
 			}
 		}
-		else if( (m_uButtonState & UISTATE_PUSHED) != 0 ) {
+		else if( (m_uiState & UISTATE_PUSHED) != 0 ) {
 			if( !m_sPushedImage.IsEmpty() ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sPushedImage) ) m_sPushedImage.Empty();
 				else return;
 			}
 		}
-		else if( (m_uButtonState & UISTATE_HOT) != 0 ) {
+		else if( (m_uiState & UISTATE_HOT) != 0 ) {
 			if( !m_sHotImage.IsEmpty() ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sHotImage) ) m_sHotImage.Empty();
 				else return;
 			}
 		}
-		else if( (m_uButtonState & UISTATE_FOCUSED) != 0 ) {
+		else if( (m_uiState & UISTATE_FOCUSED) != 0 ) {
 			if( !m_sFocusedImage.IsEmpty() ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sFocusedImage) ) m_sFocusedImage.Empty();
 				else return;

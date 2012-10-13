@@ -43,6 +43,10 @@ public:
     void SetBkImage(LPCTSTR pStrImage);
     DWORD GetBorderColor() const;
     void SetBorderColor(DWORD dwBorderColor);
+	DWORD GetHotBorderColor() const;
+	void SetHotBorderColor(DWORD dwBorderColor);
+	DWORD GetDisabledBorderColor() const;
+	void SetDisabledBorderColor(DWORD dwBorderColor);
 	DWORD GetFocusBorderColor() const;
 	void SetFocusBorderColor(DWORD dwBorderColor);
     bool IsColorHSL() const;
@@ -153,6 +157,7 @@ protected:
     CPaintManagerUI* m_pManager;
     CControlUI* m_pParent;
     CDuiString m_sName;
+	UINT m_uiState;//控件鼠标状态 经过，按下，正常等
     bool m_bUpdateNeeded;
     bool m_bMenuUsed;
     RECT m_rcItem;
@@ -183,6 +188,8 @@ protected:
     CDuiString m_sBkImage;
     DWORD m_dwBorderColor;
 	DWORD m_dwFocusBorderColor;
+    DWORD m_dwHotBorderColor;
+	DWORD m_dwDisabledBorderColor;
     bool m_bColorHSL;
     int m_nBorderSize;
     SIZE m_cxyBorderRound;

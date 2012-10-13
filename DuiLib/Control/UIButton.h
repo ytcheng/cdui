@@ -42,8 +42,6 @@ namespace DuiLib
 		void PaintStatusImage(HDC hDC);
 
 	protected:
-		UINT m_uButtonState;
-
 		DWORD m_dwHotTextColor;
 		DWORD m_dwPushedTextColor;
 		DWORD m_dwFocusedTextColor;

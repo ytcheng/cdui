@@ -149,7 +149,7 @@ namespace DuiLib
 	//
 
 	CEditUI::CEditUI() : m_pWindow(NULL), m_uMaxChar(255), m_bReadOnly(false), 
-		m_bPasswordMode(false), m_cPasswordChar(_T('*')), m_uButtonState(0), 
+		m_bPasswordMode(false), m_cPasswordChar(_T('*')), 
 		m_dwEditbkColor(0xFFFFFFFF), m_iWindowStyls(0)
 	{
 		SetTextPadding(CDuiRect(4, 3, 4, 3));
@@ -256,22 +256,6 @@ namespace DuiLib
 		{
 			return;
 		}
-		if( event.Type == UIEVENT_MOUSEENTER )
-		{
-			if( IsEnabled() ) {
-				m_uButtonState |= UISTATE_HOT;
-				Invalidate();
-			}
-			return;
-		}
-		if( event.Type == UIEVENT_MOUSELEAVE )
-		{
-			if( IsEnabled() ) {
-				m_uButtonState &= ~UISTATE_HOT;
-				Invalidate();
-			}
-			return;
-		}
 		CLabelUI::DoEvent(event);
 	}
 
@@ -279,7 +263,7 @@ namespace DuiLib
 	{
 		CControlUI::SetEnabled(bEnable);
 		if( !IsEnabled() ) {
-			m_uButtonState = 0;
+			m_uiState = 0;
 		}
 	}
 
@@ -479,24 +463,24 @@ namespace DuiLib
 
 	void CEditUI::PaintStatusImage(HDC hDC)
 	{
-		if( IsFocused() ) m_uButtonState |= UISTATE_FOCUSED;
-		else m_uButtonState &= ~ UISTATE_FOCUSED;
-		if( !IsEnabled() ) m_uButtonState |= UISTATE_DISABLED;
-		else m_uButtonState &= ~ UISTATE_DISABLED;
+		if( IsFocused() ) m_uiState |= UISTATE_FOCUSED;
+		else m_uiState &= ~ UISTATE_FOCUSED;
+		if( !IsEnabled() ) m_uiState |= UISTATE_DISABLED;
+		else m_uiState &= ~ UISTATE_DISABLED;
 
-		if( (m_uButtonState & UISTATE_DISABLED) != 0 ) {
+		if( (m_uiState & UISTATE_DISABLED) != 0 ) {
 			if( !m_sDisabledImage.IsEmpty() ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sDisabledImage) ) m_sDisabledImage.Empty();
 				else return;
 			}
 		}
-		else if( (m_uButtonState & UISTATE_FOCUSED) != 0 ) {
+		else if( (m_uiState & UISTATE_FOCUSED) != 0 ) {
 			if( !m_sFocusedImage.IsEmpty() ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sFocusedImage) ) m_sFocusedImage.Empty();
 				else return;
 			}
 		}
-		else if( (m_uButtonState & UISTATE_HOT) != 0 ) {
+		else if( (m_uiState & UISTATE_HOT) != 0 ) {
 			if( !m_sHotImage.IsEmpty() ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sHotImage) ) m_sHotImage.Empty();
 				else return;

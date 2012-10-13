@@ -63,7 +63,6 @@ namespace DuiLib
 		bool m_bReadOnly;
 		bool m_bPasswordMode;
 		TCHAR m_cPasswordChar;
-		UINT m_uButtonState;
 		CDuiString m_sNormalImage;
 		CDuiString m_sHotImage;
 		CDuiString m_sFocusedImage;

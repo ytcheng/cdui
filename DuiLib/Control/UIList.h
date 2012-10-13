@@ -278,7 +278,6 @@ public:
 protected:
     POINT ptLastMouse;
     bool m_bDragable;
-    UINT m_uButtonState;
     int m_iSepWidth;
     DWORD m_dwTextColor;
     int m_iFont;
@@ -331,7 +330,6 @@ public:
 protected:
     int m_iIndex;
     bool m_bSelected;
-    UINT m_uButtonState;
     IListOwnerUI* m_pOwner;
 };
 
@@ -427,7 +425,6 @@ public:
 protected:
     int m_iIndex;
     bool m_bSelected;
-    UINT m_uButtonState;
     IListOwnerUI* m_pOwner;
 };
 

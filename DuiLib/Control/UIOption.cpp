@@ -67,8 +67,8 @@ namespace DuiLib
 	{
 		if( m_bSelected == bSelected ) return;
 		m_bSelected = bSelected;
-		if( m_bSelected ) m_uButtonState |= UISTATE_SELECTED;
-		else m_uButtonState &= ~UISTATE_SELECTED;
+		if( m_bSelected ) m_uiState |= UISTATE_SELECTED;
+		else m_uiState &= ~UISTATE_SELECTED;
 
 		if( m_pManager != NULL ) {
 			if( !m_sGroupName.IsEmpty() ) {
@@ -104,8 +104,8 @@ namespace DuiLib
 	{
 		CControlUI::SetEnabled(bEnable);
 		if( !IsEnabled() ) {
-			if( m_bSelected ) m_uButtonState = UISTATE_SELECTED;
-			else m_uButtonState = 0;
+			if( m_bSelected ) m_uiState = UISTATE_SELECTED;
+			else m_uiState = 0;
 		}
 	}
 
@@ -165,9 +165,9 @@ namespace DuiLib
 
 	void COptionUI::PaintStatusImage(HDC hDC)
 	{
-		m_uButtonState &= ~UISTATE_PUSHED;
+		m_uiState &= ~UISTATE_PUSHED;
 
-		if( (m_uButtonState & UISTATE_SELECTED) != 0 ) {
+		if( (m_uiState & UISTATE_SELECTED) != 0 ) {
 			if( !m_sSelectedImage.IsEmpty() ) {
 				if( !DrawImage(hDC, (LPCTSTR)m_sSelectedImage) ) m_sSelectedImage.Empty();
 				else goto Label_ForeImage;
@@ -184,7 +184,7 @@ Label_ForeImage:
 
 	void COptionUI::PaintText(HDC hDC)
 	{
-		if( (m_uButtonState & UISTATE_SELECTED) != 0 )
+		if( (m_uiState & UISTATE_SELECTED) != 0 )
 		{
 			DWORD oldTextColor = m_dwTextColor;
 			if( m_dwSelectedTextColor != 0 ) m_dwTextColor = m_dwSelectedTextColor;

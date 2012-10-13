@@ -33,7 +33,6 @@ namespace DuiLib
 
 	protected:
 		SIZE m_szThumb;
-		UINT m_uButtonState;
 		int m_nStep;
 
 		CDuiString m_sThumbImage;

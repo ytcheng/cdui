@@ -28,19 +28,19 @@ namespace DuiLib
 		else
 		{
 			// get index
-			if( IsFocused() ) m_uButtonState |= UISTATE_FOCUSED;
-			else m_uButtonState &= ~ UISTATE_FOCUSED;
-			if( !IsEnabled() ) m_uButtonState |= UISTATE_DISABLED;
-			else m_uButtonState &= ~ UISTATE_DISABLED;
+			if( IsFocused() ) m_uiState |= UISTATE_FOCUSED;
+			else m_uiState &= ~ UISTATE_FOCUSED;
+			if( !IsEnabled() ) m_uiState |= UISTATE_DISABLED;
+			else m_uiState &= ~ UISTATE_DISABLED;
 
 			int nIndex = 0;
-			if ((m_uButtonState & UISTATE_DISABLED) != 0)
+			if ((m_uiState & UISTATE_DISABLED) != 0)
 				nIndex = 4;
-			else if ((m_uButtonState & UISTATE_PUSHED) != 0)
+			else if ((m_uiState & UISTATE_PUSHED) != 0)
 				nIndex = 2;
-			else if ((m_uButtonState & UISTATE_HOT) != 0)
+			else if ((m_uiState & UISTATE_HOT) != 0)
 				nIndex = 1;
-			else if ((m_uButtonState & UISTATE_FOCUSED) != 0)
+			else if ((m_uiState & UISTATE_FOCUSED) != 0)
 				nIndex = 3;
 
 			// make modify string

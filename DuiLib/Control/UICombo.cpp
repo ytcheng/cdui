@@ -86,7 +86,7 @@ LPCTSTR CComboWnd::GetWindowClassName() const
 void CComboWnd::OnFinalMessage(HWND hWnd)
 {
     m_pOwner->m_pWindow = NULL;
-    m_pOwner->m_uButtonState &= ~ UISTATE_PUSHED;
+    m_pOwner->m_uiState &= ~ UISTATE_PUSHED;
     m_pOwner->Invalidate();
     delete this;
 }
@@ -201,7 +201,7 @@ UINT CComboWnd::GetClassStyle() const
 ////////////////////////////////////////////////////////
 
 
-CComboUI::CComboUI() : m_pWindow(NULL), m_iCurSel(-1), m_uButtonState(0)
+CComboUI::CComboUI() : m_pWindow(NULL), m_iCurSel(-1)
 {
     m_szDropBox = CSize(0, 150);
     ::ZeroMemory(&m_rcTextPadding, sizeof(m_rcTextPadding));
@@ -404,14 +404,14 @@ void CComboUI::DoEvent(TEventUI& event)
     {
         if( IsEnabled() ) {
             Activate();
-            m_uButtonState |= UISTATE_PUSHED | UISTATE_CAPTURED;
+            m_uiState |= UISTATE_PUSHED | UISTATE_CAPTURED;
         }
         return;
     }
     if( event.Type == UIEVENT_BUTTONUP )
     {
-        if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
-            m_uButtonState &= ~ UISTATE_CAPTURED;
+        if( (m_uiState & UISTATE_CAPTURED) != 0 ) {
+            m_uiState &= ~ UISTATE_CAPTURED;
             Invalidate();
         }
         return;
@@ -459,16 +459,16 @@ void CComboUI::DoEvent(TEventUI& event)
     if( event.Type == UIEVENT_MOUSEENTER )
     {
         if( ::PtInRect(&m_rcItem, event.ptMouse ) ) {
-            if( (m_uButtonState & UISTATE_HOT) == 0  )
-                m_uButtonState |= UISTATE_HOT;
+            if( (m_uiState & UISTATE_HOT) == 0  )
+                m_uiState |= UISTATE_HOT;
             Invalidate();
         }
         return;
     }
     if( event.Type == UIEVENT_MOUSELEAVE )
     {
-        if( (m_uButtonState & UISTATE_HOT) != 0 ) {
-            m_uButtonState &= ~UISTATE_HOT;
+        if( (m_uiState & UISTATE_HOT) != 0 ) {
+            m_uiState &= ~UISTATE_HOT;
             Invalidate();
         }
         return;
@@ -504,7 +504,7 @@ CDuiString CComboUI::GetText() const
 void CComboUI::SetEnabled(bool bEnable)
 {
     CContainerUI::SetEnabled(bEnable);
-    if( !IsEnabled() ) m_uButtonState = 0;
+    if( !IsEnabled() ) m_uiState = 0;
 }
 
 CDuiString CComboUI::GetDropBoxAttributeList()
@@ -902,30 +902,30 @@ void CComboUI::DoPaint(HDC hDC, const RECT& rcPaint)
 
 void CComboUI::PaintStatusImage(HDC hDC)
 {
-    if( IsFocused() ) m_uButtonState |= UISTATE_FOCUSED;
-    else m_uButtonState &= ~ UISTATE_FOCUSED;
-    if( !IsEnabled() ) m_uButtonState |= UISTATE_DISABLED;
-    else m_uButtonState &= ~ UISTATE_DISABLED;
+    if( IsFocused() ) m_uiState |= UISTATE_FOCUSED;
+    else m_uiState &= ~ UISTATE_FOCUSED;
+    if( !IsEnabled() ) m_uiState |= UISTATE_DISABLED;
+    else m_uiState &= ~ UISTATE_DISABLED;
 
-    if( (m_uButtonState & UISTATE_DISABLED) != 0 ) {
+    if( (m_uiState & UISTATE_DISABLED) != 0 ) {
         if( !m_sDisabledImage.IsEmpty() ) {
             if( !DrawImage(hDC, (LPCTSTR)m_sDisabledImage) ) m_sDisabledImage.Empty();
             else return;
         }
     }
-    else if( (m_uButtonState & UISTATE_PUSHED) != 0 ) {
+    else if( (m_uiState & UISTATE_PUSHED) != 0 ) {
         if( !m_sPushedImage.IsEmpty() ) {
             if( !DrawImage(hDC, (LPCTSTR)m_sPushedImage) ) m_sPushedImage.Empty();
             else return;
         }
     }
-    else if( (m_uButtonState & UISTATE_HOT) != 0 ) {
+    else if( (m_uiState & UISTATE_HOT) != 0 ) {
         if( !m_sHotImage.IsEmpty() ) {
             if( !DrawImage(hDC, (LPCTSTR)m_sHotImage) ) m_sHotImage.Empty();
             else return;
         }
     }
-    else if( (m_uButtonState & UISTATE_FOCUSED) != 0 ) {
+    else if( (m_uiState & UISTATE_FOCUSED) != 0 ) {
         if( !m_sFocusedImage.IsEmpty() ) {
             if( !DrawImage(hDC, (LPCTSTR)m_sFocusedImage) ) m_sFocusedImage.Empty();
             else return;
