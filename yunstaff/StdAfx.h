@@ -28,6 +28,7 @@ using namespace DuiLib;
 #       pragma comment(lib, "..\\lib\\DuiLib.lib")
 #   endif
 #endif
+#define WM_ICONMESSAGE (WM_USER+100)
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

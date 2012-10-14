@@ -171,7 +171,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\Debug\YunStaff.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
-      <MapFileName>.\Debug\YunStaff.map</MapFileName>
+      <MapFileName>Debug\YunStaff.map</MapFileName>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
@@ -283,6 +283,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControlEx.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="StdAfx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +291,13 @@
       <Project>{e106acd7-4e53-4aee-942b-d0dd426db34e}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="YunStaff.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\Desktop\favicon.ico" />
+    <None Include="..\..\..\..\Desktop\yun.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include <exdisp.h>
 #include <comdef.h>
+#include <ShellAPI.h>
 #include "ControlEx.h"
+#include "resource.h"
 #include <iostream>
-
+NOTIFYICONDATA m_tnd;
 class CYunStaffFrameWnd : public CWindowWnd, public INotifyUI
 {
 public:
@@ -27,11 +29,14 @@ public:
 		if( msg.sType == _T("windowinit") ) OnPrepare();
 		else if( msg.sType == _T("click") ) {
 			if( msg.pSender == m_pCloseBtn ) {
-				PostQuitMessage(0);
+				SendMessage(WM_DESTROY, SC_MINIMIZE, 0); 
 				return; 
 			}
 			else if( msg.pSender == m_pMinBtn ) { 
-				SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0); return; }
+				::ShowWindow(*this, SW_HIDE);
+				//SendMessage(WM_SYSCOMMAND, SC_MINIMIZE, 0); 
+				return;
+			}
 			else if( msg.pSender == m_pMaxBtn ) { 
 				SendMessage(WM_SYSCOMMAND, SC_MAXIMIZE, 0); return; }
 			else if( msg.pSender == m_pRestoreBtn ) { 
@@ -75,6 +80,15 @@ public:
 		m_pm.AddNotifier(this);
 
 		Init();
+		
+		m_tnd.cbSize=sizeof(NOTIFYICONDATA);
+		m_tnd.hWnd=*this;
+		//tnd.uID=IDR_MAINFRAME;
+		m_tnd.uFlags=NIF_MESSAGE|NIF_ICON|NIF_TIP;
+		m_tnd.uCallbackMessage=WM_ICONMESSAGE;
+		m_tnd.hIcon=LoadIcon((HINSTANCE) GetWindowLongPtr(*this, GWLP_HINSTANCE), MAKEINTRESOURCE(IDI_ICON3));
+		strcpy(m_tnd.szTip,"云办公系统");//图标提示为"测试程序"
+		Shell_NotifyIcon(NIM_ADD,&m_tnd);//向任务栏添加图标 
 		return 0;
 	}
 
@@ -85,10 +99,10 @@ public:
 	}
 
 	LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-	{
+	{	
+		Shell_NotifyIcon(NIM_DELETE,&m_tnd);
 		::PostQuitMessage(0L);
-
-		bHandled = FALSE;
+		bHandled = FALSE;		
 		return 0;
 	}
 
@@ -184,6 +198,7 @@ public:
 	{
 		// 有时会在收到WM_NCDESTROY后收到wParam为SC_CLOSE的WM_SYSCOMMAND
 		if( wParam == SC_CLOSE ) {
+			Shell_NotifyIcon(NIM_DELETE,&m_tnd);
 			::PostQuitMessage(0L);
 			bHandled = TRUE;
 			return 0;
@@ -206,6 +221,16 @@ public:
 		}
 		return lRes;
 	}
+
+	LRESULT onIconMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+	{
+		if(lParam==WM_LBUTTONDBLCLK)
+        {
+			::ShowWindow(*this, SW_SHOW);
+            // AfxGetApp()->m_pMainWnd->ShowWindow(SW_SHOW);
+        }
+		return TRUE;
+	}
 	
 
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -223,6 +248,9 @@ public:
 		case WM_SIZE:          lRes = OnSize(uMsg, wParam, lParam, bHandled); break;
 		case WM_GETMINMAXINFO: lRes = OnGetMinMaxInfo(uMsg, wParam, lParam, bHandled); break;
 		case WM_SYSCOMMAND:    lRes = OnSysCommand(uMsg, wParam, lParam, bHandled); break;
+		case WM_ICONMESSAGE:   lRes = onIconMessage(uMsg, wParam, lParam, bHandled); break;
+
+            
 		default:
 		bHandled = FALSE;
 		}
@@ -238,7 +266,7 @@ private:
 	CButtonUI* m_pCloseBtn;
 	CButtonUI* m_pMaxBtn;
 	CButtonUI* m_pRestoreBtn;
-	CButtonUI* m_pMinBtn;
+	CButtonUI* m_pMinBtn;	
 	//...
 };
 
@@ -255,9 +283,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 
 	CYunStaffFrameWnd* pFrame = new CYunStaffFrameWnd();
 	if( pFrame == NULL ) return 0;
-	pFrame->Create(NULL, _T("360安全卫士"), UI_WNDSTYLE_FRAME, 0L, 0, 0, 800, 572);
+	pFrame->Create(NULL, _T("云达办公系统"), UI_WNDSTYLE_FRAME, 0L, 0, 0, 800, 572);
 	pFrame->CenterWindow();
 	::ShowWindow(*pFrame, SW_SHOW);
+	//::SendMessage(*pFrame, WM_SETICON, TRUE, (LPARAM)::LoadIcon((HMODULE)&__ImageBase, MAKEINTRESOURCE(IDI_BIG)));
+	//SetIcon(::LoadIcon((HMODULE)&__ImageBase, MAKEINTRESOURCE(IDI_SMALL)), FALSE);
+
+	SendMessage(*pFrame, WM_SETICON, FALSE,  (LPARAM) LoadIcon((HINSTANCE) GetWindowLongPtr(*pFrame, GWLP_HINSTANCE), MAKEINTRESOURCE(IDI_ICON2)));
+    SendMessage(*pFrame, WM_SETICON, TRUE, (LPARAM) LoadIcon((HINSTANCE) GetWindowLongPtr(*pFrame, GWLP_HINSTANCE),  MAKEINTRESOURCE(IDI_ICON3)));
 
 	CPaintManagerUI::MessageLoop();
 
