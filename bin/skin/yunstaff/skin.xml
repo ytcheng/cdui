@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<Window size="280,580" mininfo="200,500" sizebox="8,8,12,12" caption="0,0,0,30" roundcorner="9,9">
+<Window size="280,580" mininfo="200,540" sizebox="8,8,12,12" caption="0,0,0,30" roundcorner="9,9">
 	<Font name="微软雅黑" size="12" default="1" />
 	<Font name="微软雅黑" size="12" bold="true" />
     <VerticalLayout name="HorizontalLayoutUI1" pos="0,0,-0,-0" bkimage="file='main_frame.bmp' corner='16,30,16,16' mask='0xffffffff'" bordercolor="#ff1d609a" bordersize="1" bkcolor="#fff4fbff">
