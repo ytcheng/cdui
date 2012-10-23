@@ -17,6 +17,21 @@
     <ClCompile Include="YunStaff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="login_main.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xmppauth.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xmpppump.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xmppthread.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xmppsocket.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControlEx.h">
@@ -26,6 +41,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xmppauth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xmpppump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xmppthread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xmppsocket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

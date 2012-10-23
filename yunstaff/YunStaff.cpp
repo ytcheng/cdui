@@ -5,6 +5,12 @@
 #include "ControlEx.h"
 #include "resource.h"
 #include <iostream>
+#include "talk/base/thread.h"
+#include "xmppthread.h"
+#include "talk/xmpp/constants.h"
+#include "talk/xmpp/xmppclientsettings.h"
+#include "talk/xmpp/xmppengine.h"
+
 NOTIFYICONDATA m_tnd;
 class CYunStaffFrameWnd : public CWindowWnd, public INotifyUI
 {
@@ -47,6 +53,22 @@ public:
 			else if( msg.pSender == m_pRestoreBtn ) { 
 				SendMessage(WM_SYSCOMMAND, SC_RESTORE, 0); return; }
 			else if (msg.pSender == m_pLoginBtn){
+				XmppThread thread;
+				thread.Start();
+
+				talk_base::InsecureCryptStringImpl pass;
+				LPCTSTR password = m_pPassword->GetText().GetData();
+				pass.password() = password;
+				buzz::XmppClientSettings xcs;
+				LPCTSTR username = m_pUsername->GetText().GetData();
+				xcs.set_user(username);
+				xcs.set_host("example.com");
+				xcs.set_use_tls(buzz::TLS_DISABLED);
+				xcs.set_pass(talk_base::CryptString(pass));
+				//xcs.set_auth_token(buzz::AUTH_MECHANISM_OAUTH2,
+				//                   auth_token.c_str());
+				xcs.set_server(talk_base::SocketAddress("example.com", 5222));
+				thread.Login(xcs);
 				MessageBox(*this,m_pUsername->GetText(),"sdfd",1);
 			}
 		}

@@ -28,6 +28,14 @@ using namespace DuiLib;
 #       pragma comment(lib, "..\\lib\\DuiLib.lib")
 #   endif
 #endif
+#pragma comment(lib, "expat.lib")
+#pragma comment(lib, "libjingle.lib")
+#pragma comment(lib,"ws2_32.lib")
+#pragma comment(lib,"Secur32.lib")
+#pragma comment(lib,"Crypt32.lib")
+#pragma comment(lib,"Iphlpapi.lib")
+#pragma comment(lib,"Winmm.lib")
+#pragma comment(lib,"Strmiids.lib")
 #define WM_ICONMESSAGE (WM_USER+100)
 
 //{{AFX_INSERT_LOCATION}}
