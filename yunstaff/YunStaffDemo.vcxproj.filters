@@ -17,9 +17,6 @@
     <ClCompile Include="YunStaff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="login_main.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="xmppauth.cc">
       <Filter>Source Files</Filter>
     </ClCompile>

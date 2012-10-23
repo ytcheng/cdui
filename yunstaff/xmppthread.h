@@ -41,7 +41,7 @@ using namespace buzz;
 class XmppThread:
     public talk_base::Thread, XmppPumpNotify, talk_base::MessageHandler {
 public:
-  XmppThread();
+  XmppThread(HWND hwnd);
   ~XmppThread();
 
   XmppClient* client() { return pump_->client(); }
@@ -55,12 +55,13 @@ private:
   XmppPump* pump_;
   PresenceOutTask* presence_out_;
   Status my_status_;
+  HWND m_hWnd;
 
   void OnStateChange(XmppEngine::State state);
   void OnMessage(talk_base::Message* pmsg);
   void InitPresence();
   void SetAvailable(const Jid& jid, Status* status);
-  void SendStatus(const Status& status);
+  void SendStatus(const Status& status);  
 };
 
 #endif  // TALK_EXAMPLES_LOGIN_XMPPTHREAD_H_

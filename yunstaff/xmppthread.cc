@@ -47,7 +47,7 @@ struct LoginData: public talk_base::MessageData {
 
 } // namespace
 
-XmppThread::XmppThread() {
+XmppThread::XmppThread(HWND hwnd):m_hWnd(hwnd) {
   pump_ = new XmppPump(this);
 }
 
@@ -82,6 +82,9 @@ void XmppThread::InitPresence() {
 }
 
 void XmppThread::OnStateChange(XmppEngine::State state) {
+	char a[10];
+	sprintf(a,"%d",state);
+	MessageBox(m_hWnd , a, "dsfdf",1);
 	switch (state) {
 		 case XmppEngine::STATE_OPEN:		 
 		 InitPresence();

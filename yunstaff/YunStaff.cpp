@@ -15,7 +15,7 @@ NOTIFYICONDATA m_tnd;
 class CYunStaffFrameWnd : public CWindowWnd, public INotifyUI
 {
 public:
-	CYunStaffFrameWnd() { };
+	CYunStaffFrameWnd() {};
 	LPCTSTR GetWindowClassName() const { return _T("UIMainFrame"); };
 	UINT GetClassStyle() const { return CS_DBLCLKS; };
 	void OnFinalMessage(HWND /*hWnd*/) { delete this; };
@@ -53,8 +53,7 @@ public:
 			else if( msg.pSender == m_pRestoreBtn ) { 
 				SendMessage(WM_SYSCOMMAND, SC_RESTORE, 0); return; }
 			else if (msg.pSender == m_pLoginBtn){
-				XmppThread thread;
-				thread.Start();
+				
 
 				talk_base::InsecureCryptStringImpl pass;
 				LPCTSTR password = m_pPassword->GetText().GetData();
@@ -68,7 +67,7 @@ public:
 				//xcs.set_auth_token(buzz::AUTH_MECHANISM_OAUTH2,
 				//                   auth_token.c_str());
 				xcs.set_server(talk_base::SocketAddress("example.com", 5222));
-				thread.Login(xcs);
+				m_thread->Login(xcs);
 				MessageBox(*this,m_pUsername->GetText(),"sdfd",1);
 			}
 		}
@@ -110,6 +109,10 @@ public:
 		m_tnd.hIcon=LoadIcon((HINSTANCE) GetWindowLongPtr(*this, GWLP_HINSTANCE), MAKEINTRESOURCE(IDI_ICON3));
 		strcpy(m_tnd.szTip,"云办公系统");//图标提示为"测试程序"
 		Shell_NotifyIcon(NIM_ADD,&m_tnd);//向任务栏添加图标 
+
+		m_thread = new XmppThread(m_hWnd);
+		m_thread->Start();
+
 		return 0;
 	}
 
@@ -293,6 +296,7 @@ private:
 	CCheckBoxUI* m_pAutoLogin;
 	CEditUI* m_pUsername;
 	CEditUI* m_pPassword;
+	XmppThread *m_thread;
 	//...
 };
 
