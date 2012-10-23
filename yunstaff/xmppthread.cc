@@ -28,18 +28,21 @@
 #include "xmppthread.h"
 
 #include "talk/xmpp/xmppclientsettings.h"
+#include "talk/xmpp/xmppengine.h"
 #include "xmppauth.h"
-
+#include "presenceouttask.h"
+#include "status.h"
+using namespace buzz;
 namespace {
 
 const uint32 MSG_LOGIN = 1;
 const uint32 MSG_DISCONNECT = 2;
 
 struct LoginData: public talk_base::MessageData {
-  LoginData(const buzz::XmppClientSettings& s) : xcs(s) {}
+  LoginData(const XmppClientSettings& s) : xcs(s) {}
   virtual ~LoginData() {}
 
-  buzz::XmppClientSettings xcs;
+  XmppClientSettings xcs;
 };
 
 } // namespace
@@ -56,22 +59,41 @@ void XmppThread::ProcessMessages(int cms) {
   talk_base::Thread::ProcessMessages(cms);
 }
 
-void XmppThread::Login(const buzz::XmppClientSettings& xcs) {
+void XmppThread::Login(const XmppClientSettings& xcs) {
   Post(this, MSG_LOGIN, new LoginData(xcs));
 }
 
 void XmppThread::Disconnect() {
   Post(this, MSG_DISCONNECT);
 }
+void XmppThread::SendStatus(const Status& status) {
+  presence_out_->Send(status);
+}
+void XmppThread::SetAvailable(const Jid& jid, Status* status) {
+  status->set_jid(jid);
+  status->set_available(true);
+  status->set_show(Status::SHOW_ONLINE);
+}
+void XmppThread::InitPresence() {
+  presence_out_ = new PresenceOutTask(pump_->client());
+  SetAvailable(pump_->client()->jid(), &my_status_);
+  SendStatus(my_status_);
+  presence_out_->Start(); 
+}
 
-void XmppThread::OnStateChange(buzz::XmppEngine::State state) {
+void XmppThread::OnStateChange(XmppEngine::State state) {
+	switch (state) {
+		 case XmppEngine::STATE_OPEN:		 
+		 InitPresence();
+		 break;
+	}	
 }
 
 void XmppThread::OnMessage(talk_base::Message* pmsg) {
   if (pmsg->message_id == MSG_LOGIN) {
     ASSERT(pmsg->pdata != NULL);
     LoginData* data = reinterpret_cast<LoginData*>(pmsg->pdata);
-    pump_->DoLogin(data->xcs, new XmppSocket(buzz::TLS_DISABLED),
+    pump_->DoLogin(data->xcs, new XmppSocket(TLS_DISABLED),
         new XmppAuth());
     delete data;
   } else if (pmsg->message_id == MSG_DISCONNECT) {

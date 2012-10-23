@@ -61,7 +61,7 @@ public:
 
   int64 CurrentTime();
 
-  void OnMessage(talk_base::Message *pmsg);
+  void OnMessage(talk_base::Message *pmsg); 
 
   buzz::XmppReturnStatus SendStanza(const buzz::XmlElement *stanza);
 

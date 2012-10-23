@@ -32,7 +32,10 @@
 #include "talk/examples/login/xmpppump.h"
 #include "talk/examples/login/xmppsocket.h"
 #include "talk/xmpp/xmppclientsettings.h"
+#include "presenceouttask.h"
 #include "talk/xmpp/xmppengine.h"
+#include "status.h"
+using namespace buzz;
 
 
 class XmppThread:
@@ -41,18 +44,23 @@ public:
   XmppThread();
   ~XmppThread();
 
-  buzz::XmppClient* client() { return pump_->client(); }
+  XmppClient* client() { return pump_->client(); }
 
   void ProcessMessages(int cms);
 
-  void Login(const buzz::XmppClientSettings & xcs);
+  void Login(const XmppClientSettings & xcs);
   void Disconnect();
 
 private:
   XmppPump* pump_;
+  PresenceOutTask* presence_out_;
+  Status my_status_;
 
-  void OnStateChange(buzz::XmppEngine::State state);
+  void OnStateChange(XmppEngine::State state);
   void OnMessage(talk_base::Message* pmsg);
+  void InitPresence();
+  void SetAvailable(const Jid& jid, Status* status);
+  void SendStatus(const Status& status);
 };
 
 #endif  // TALK_EXAMPLES_LOGIN_XMPPTHREAD_H_
