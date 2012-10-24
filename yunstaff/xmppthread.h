@@ -35,7 +35,6 @@
 #include "presenceouttask.h"
 #include "talk/xmpp/xmppengine.h"
 #include "status.h"
-using namespace buzz;
 
 
 class XmppThread:

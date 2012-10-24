@@ -270,6 +270,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MainFrameWnd.cpp" />
     <ClCompile Include="presenceouttask.cc" />
     <ClCompile Include="StdAfx.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -297,6 +298,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ControlEx.h" />
+    <ClInclude Include="MainFrameWnd.h" />
     <ClInclude Include="presenceouttask.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="status.h" />

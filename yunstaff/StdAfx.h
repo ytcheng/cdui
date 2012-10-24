@@ -12,9 +12,10 @@
 #include <zmouse.h>
 
 #include "..\DuiLib\UIlib.h"
-
+#include "talk/xmpp/constants.h"
 using namespace DuiLib;
-
+using namespace buzz;
+#include "ControlEx.h"
 #ifdef _DEBUG
 #   ifdef _UNICODE
 #       pragma comment(lib, "..\\lib\\DuiLib_ud.lib")
