@@ -272,6 +272,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Control\UITreeView.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Build\Debug/DuiLib.pch</PrecompiledHeaderOutputFile>
@@ -334,6 +335,7 @@
     <ClCompile Include="Utils\WinImplBase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Control\UITreeView.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="UIlib.h" />
     <ClInclude Include="Utils\downloadmgr.h" />

@@ -270,7 +270,60 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
                 }
             }
             continue;
-        }
+        }		//树控件XML解析
+		else if( _tcscmp(pstrClass, _T("TreeNode")) == 0 ) {
+			CTreeNodeUI* pParentNode	= static_cast<CTreeNodeUI*>(pParent->GetInterface(_T("TreeNode")));
+			CTreeNodeUI* pNode			= new CTreeNodeUI();
+			if(pParentNode){
+				if(!pParentNode->Add(pNode)){
+					delete pNode;
+					continue;
+				}
+			}
+
+			// 若有控件默认配置先初始化默认属性
+			if( pManager ) {
+				pNode->SetManager(pManager, NULL, false);
+				LPCTSTR pDefaultAttributes = pManager->GetDefaultAttributeList(pstrClass);
+				if( pDefaultAttributes ) {
+					pNode->ApplyAttributeList(pDefaultAttributes);
+				}
+			}
+
+			// 解析所有属性并覆盖默认属性
+			if( node.HasAttributes() ) {
+				TCHAR szValue[500] = { 0 };
+				SIZE_T cchLen = lengthof(szValue) - 1;
+				// Set ordinary attributes
+				int nAttributes = node.GetAttributeCount();
+				for( int i = 0; i < nAttributes; i++ ) {
+					pNode->SetAttribute(node.GetAttributeName(i), node.GetAttributeValue(i));
+				}
+			}
+
+			//检索子节点及附加控件
+			if(node.HasChildren()){
+				CControlUI* pSubControl = _Parse(&node,pNode,pManager);
+				if(pSubControl && _tcscmp(pSubControl->GetClass(),_T("TreeNodeUI")) != 0)
+				{
+					// 					pSubControl->SetFixedWidth(30);
+					// 					CHorizontalLayoutUI* pHorz = pNode->GetTreeNodeHoriznotal();
+					// 					pHorz->Add(new CEditUI());
+					// 					continue;
+				}
+			}
+
+			if(!pParentNode){
+				CTreeViewUI* pTreeView = static_cast<CTreeViewUI*>(pParent->GetInterface(_T("TreeView")));
+				ASSERT(pTreeView);
+				if( pTreeView == NULL ) return NULL;
+				if( !pTreeView->Add(pNode) ) {
+					delete pNode;
+					continue;
+				}
+			}
+			continue;
+		}
         else {
             SIZE_T cchLen = _tcslen(pstrClass);
             switch( cchLen ) {
@@ -300,6 +353,7 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
 				else if (_tcscmp(pstrClass, _T("ComboBox")) == 0)			pControl = new CComboBoxUI;
 				else if (_tcscmp(pstrClass, _T("DateTime")) == 0)			pControl = new CDateTimeUI;
 				// add by:zjie
+				else if( _tcscmp(pstrClass, _T("TreeView")) == 0)			pControl = new CTreeViewUI;
                 break;
             case 9:
                 if( _tcscmp(pstrClass, _T("Container")) == 0 )              pControl = new CContainerUI;
@@ -363,16 +417,22 @@ CControlUI* CDialogBuilder::_Parse(CMarkupNode* pRoot, CControlUI* pParent, CPai
             _Parse(&node, pControl, pManager);
         }
         // Attach to parent
-        // 因为某些属性和父窗口相关，比如selected，必须先Add到父窗口
-        if( pParent != NULL ) {
-            if( pContainer == NULL ) pContainer = static_cast<IContainerUI*>(pParent->GetInterface(_T("IContainer")));
-            ASSERT(pContainer);
-            if( pContainer == NULL ) return NULL;
-            if( !pContainer->Add(pControl) ) {
-                delete pControl;
-                continue;
-            }
-        }
+        // 因为某些属性和父窗口相关，比如selected，必须先Add到父窗口       
+		if( pParent != NULL ) {
+			CTreeNodeUI* pContainerNode = static_cast<CTreeNodeUI*>(pParent->GetInterface(_T("TreeNode")));
+			if(pContainerNode)
+				pContainerNode->GetTreeNodeHoriznotal()->Add(pControl);
+			else
+			{
+				if( pContainer == NULL ) pContainer = static_cast<IContainerUI*>(pParent->GetInterface(_T("IContainer")));
+				ASSERT(pContainer);
+				if( pContainer == NULL ) return NULL;
+				if( !pContainer->Add(pControl) ) {
+					delete pControl;
+					continue;
+				}
+			}
+		}
         // Init default attributes
         if( pManager ) {
             pControl->SetManager(pManager, NULL, false);
